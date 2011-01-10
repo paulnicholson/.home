@@ -1,3 +1,8 @@
 #!/bin/bash
 
+if ! grep -q ".home/.profile" ~/.profile; then
+  echo 'source $HOME/.home/.profile' >> ~/.profile
+  source ~/.profile
+fi
+
 ./ruby/setup
