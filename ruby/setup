@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! -e "$HOME/.gemrc" ]; then
+  ln -s ~/.home/ruby/.gemrc ~/.gemrc
+fi
+
+if [ ! -e "$HOME/.rvmrc" ]; then
+  ln -s ~/.home/ruby/.rvmrc ~/.rvmrc
+fi
+
+./ruby/rvm

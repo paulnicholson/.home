@@ -1,5 +1,3 @@
 #!/bin/bash
 
-ln -s ~/.home/ruby/.gemrc ~/.gemrc
-
-./ruby/rvm
+./ruby/setup
