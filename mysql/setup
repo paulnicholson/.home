@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! -e "/Library/LaunchDaemons/com.mysql.mysqld.plist" ]; then
+  sudo cp ~/.home/mysql/com.mysql.mysqld.plist /Library/LaunchDaemons/
+  sudo chown root:wheel /Library/LaunchDaemons/com.mysql.mysqld.plist
+  sudo chmod 644 /Library/LaunchDaemons/com.mysql.mysqld.plist
+fi
+
+if ! sudo launchctl list | grep -q com.mysql.mysqld; then
+  sudo launchctl load /Library/LaunchDaemons/com.mysql.mysqld.plist
+fi
