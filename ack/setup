@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if ! port installed | grep -q p5-app-ack; then
+  sudo port install p5-app-ack
+fi
+
+if [ ! -e "$HOME/.ackrc" ]; then
+  ln -s ~/.home/ack/.ackrc ~/.ackrc
+fi

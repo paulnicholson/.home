@@ -5,5 +5,6 @@ if ! grep -q ".home/.profile" ~/.profile; then
   source ~/.profile
 fi
 
+./ack/setup
 ./mysql/setup
 ./ruby/setup
