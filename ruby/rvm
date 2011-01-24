@@ -9,6 +9,10 @@ if ! grep -q ".rvm/scripts/rvm" ~/.profile; then
   source ~/.profile
 fi
 
+if ! grep -q "bundler" ~/.rvm/gemsets/global.gems; then
+  echo 'bunlder' >> ~/.rvm/gemsets/global.gems
+fi
+
 rvm reload
 
 if ! rvm list | grep -q 1.8.7; then
@@ -21,8 +25,3 @@ if ! rvm list | grep -q 1.9.2; then
   rvm install 1.9.2
 fi
 
-rvm --default use 1.9.2@global
-gem install bundler
-
-rvm use 1.8.7@global
-gem install bundler
