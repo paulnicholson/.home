@@ -1,4 +1,4 @@
 --type-add
 html=.haml
---type-add
+--type-set
 sass=.sass,.scss
