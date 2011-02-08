@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ $(sysctl kern.sysv.shmall | sed s/\[^0-9]*//) -lt 65536 ]; then
+  echo "Running 'sudo sysctl -w kern.sysv.shmall=65536'"
+  sudo sysctl -w kern.sysv.shmall=65536
+  echo "Running 'sudo sed -Ei -- \"s/^kern.sysv.shmall=(.*)$/kern.sysv.shmall=65536\\\\\"$'\n'\"#kern.sysv.shmall=\1/\" /etc/sysctl.conf'"
+  sudo sed -Ei -- "s/^kern.sysv.shmall=(.*)$/kern.sysv.shmall=65536\\"$'\n'"#kern.sysv.shmall=\1/" /etc/sysctl.conf
+fi
+
+if ! port installed | grep -q postgresql84-server; then
+  echo "Running 'sudo port install postgresql84-server'"
+  sudo port install postgresql84-server
+  echo "Running 'sudo mkdir -p /opt/local/var/db/postgresql84/defaultdb'"
+  sudo mkdir -p /opt/local/var/db/postgresql84/defaultdb
+  echo "Running 'sudo chown postgres:postgres /opt/local/var/db/postgresql84/defaultdb'"
+  sudo chown postgres:postgres /opt/local/var/db/postgresql84/defaultdb
+
+  echo "Running 'sudo su postgres -c '/opt/local/lib/postgresql84/bin/initdb -D /opt/local/var/db/postgresql84/defaultdb''"
+  sudo su postgres -c '/opt/local/lib/postgresql84/bin/initdb -D /opt/local/var/db/postgresql84/defaultdb'
+  echo "Running 'sudo port load postgresql84-server'"
+  sudo port load postgresql84-server
+fi
+
+
+
