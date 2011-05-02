@@ -10,7 +10,11 @@ if ! grep -q ".rvm/scripts/rvm" ~/.profile; then
 fi
 
 if ! grep -q "bundler" ~/.rvm/gemsets/global.gems; then
-  echo 'bunlder' >> ~/.rvm/gemsets/global.gems
+  echo 'bundler' >> ~/.rvm/gemsets/global.gems
+fi
+
+if ! grep -q "gemedit" ~/.rvm/gemsets/global.gems; then
+  echo 'gemedit' >> ~/.rvm/gemsets/global.gems
 fi
 
 rvm reload
