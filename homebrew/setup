@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if ! groups | grep -q "staff"; then
+  echo "Adding $USER to the staff group"
+  echo "Running 'sudo dscl /Local/Default -append /Groups/staff GroupMembership $USER'"
+  sudo dscl /Local/Default -append /Groups/staff GroupMembership $USER
+fi
+
+if [ ! -f "/usr/local/bin/brew" ]; then
+  ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+fi
+
