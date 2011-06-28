@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if ! brew list libxml2 >& /dev/null; then
+  brew install libxml2
+  brew link libxml2
+fi
+
+if ! brew list libxslt >& /dev/null; then
+  brew install https://github.com/adamv/homebrew-alt/raw/master/duplicates/libxslt.rb
+  brew link libxslt
+fi
+
+if ! brew list libiconv >& /dev/null; then
+  brew install libiconv
+  brew link libiconv
+fi
+

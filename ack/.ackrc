@@ -1,4 +1,6 @@
 --type-add
 html=.haml
+--type-add
+js=.coffee
 --type-set
 sass=.sass,.scss

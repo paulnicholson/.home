@@ -1,8 +1,7 @@
 #!/bin/bash
 
-if ! port installed | grep -q p5-app-ack; then
-  echo "Running 'sudo port install p5-app-ack'"
-  sudo port install p5-app-ack
+if ! brew list ack >& /dev/null; then
+  brew install ack
 fi
 
 if [ ! -e "$HOME/.ackrc" ]; then

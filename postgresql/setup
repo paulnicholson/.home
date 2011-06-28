@@ -7,19 +7,20 @@ if [ $(sysctl kern.sysv.shmall | sed s/\[^0-9]*//) -lt 65536 ]; then
   sudo sed -Ei -- "s/^kern.sysv.shmall=(.*)$/kern.sysv.shmall=65536\\"$'\n'"#kern.sysv.shmall=\1/" /etc/sysctl.conf
 fi
 
-if ! port installed | grep -q postgresql84-server; then
-  echo "Running 'sudo port install postgresql84-server'"
-  sudo port install postgresql84-server
-  echo "Running 'sudo mkdir -p /opt/local/var/db/postgresql84/defaultdb'"
-  sudo mkdir -p /opt/local/var/db/postgresql84/defaultdb
-  echo "Running 'sudo chown postgres:postgres /opt/local/var/db/postgresql84/defaultdb'"
-  sudo chown postgres:postgres /opt/local/var/db/postgresql84/defaultdb
-
-  echo "Running 'sudo su postgres -c '/opt/local/lib/postgresql84/bin/initdb -D /opt/local/var/db/postgresql84/defaultdb''"
-  sudo su postgres -c '/opt/local/lib/postgresql84/bin/initdb -D /opt/local/var/db/postgresql84/defaultdb'
-  echo "Running 'sudo port load postgresql84-server'"
-  sudo port load postgresql84-server
+if ! brew list postgresql >& /dev/null; then
+  brew install postgresql
+  initdb /usr/local/var/postgres
 fi
 
+if [ ! -d ~/Library/LaunchAgents ]; then
+  mkdir -p ~/Library/LaunchAgents
+fi
 
+if [ ! -f ~/Library/LaunchAgents/org.postgresql.postgres.plist ]; then
+  cp /usr/local/Cellar/postgresql/9.0.4/org.postgresql.postgres.plist ~/Library/LaunchAgents/
+fi
+
+if ! launchctl list | grep -q org.postgresql.postgres; then
+  launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist
+fi
 
