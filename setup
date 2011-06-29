@@ -10,4 +10,4 @@ fi
 #./nokogiri/setup
 ./postgresql/setup
 #./mysql/setup
-#./ruby/setup
+./ruby/setup
