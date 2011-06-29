@@ -7,7 +7,7 @@ fi
 
 ./homebrew/setup
 ./ack/setup
-./nokogiri/setup
+#./nokogiri/setup
 ./postgresql/setup
 #./mysql/setup
 #./ruby/setup
