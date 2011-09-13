@@ -6,8 +6,9 @@ fi
 
 if ! grep -q ".rvm/scripts/rvm" ~/.profile; then
   echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.' >> ~/.profile
-  source ~/.profile
 fi
+
+source ~/.profile
 
 if ! grep -q "bundler" ~/.rvm/gemsets/global.gems; then
   echo 'bundler' >> ~/.rvm/gemsets/global.gems
